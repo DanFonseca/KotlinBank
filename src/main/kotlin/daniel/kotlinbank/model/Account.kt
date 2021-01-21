@@ -10,7 +10,7 @@ class Account (
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long,
         @NotNull ()
-        val amount: BigDecimal,
+        var amount: BigDecimal,
 
         @OneToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "Client_cpf")

@@ -3,11 +3,13 @@ package daniel.kotlinbank.service.Impl
 import daniel.kotlinbank.errors.AccountException
 import daniel.kotlinbank.errors.ClientException
 import daniel.kotlinbank.model.Account
+import daniel.kotlinbank.model.request.Request
+import daniel.kotlinbank.model.request.TransferRequest
 import daniel.kotlinbank.repository.AccountRepository
-import daniel.kotlinbank.service.Util.CPFUtil
 import daniel.kotlinbank.service.interfaces.AccountService
 import daniel.kotlinbank.service.interfaces.ClientService
 import org.springframework.stereotype.Service
+import java.math.BigDecimal
 
 @Service
 class AccountServiceImpl(
@@ -18,10 +20,7 @@ class AccountServiceImpl(
     override fun createAccount(account: Account): Account {
 
         if (account.client != null) {
-
-           // CPFUtil.myValidateCPF(account.client.cpf)
             isAccountAlreadyExist(account.client.cpf)
-
             if (account.client.name == "")
                 throw ClientException("Name can not be empty ")
         }
@@ -34,7 +33,62 @@ class AccountServiceImpl(
     }
 
     override fun isAccountAlreadyExist(cpf: String) {
-         if (clientService.findClientByCPF(cpf) != null)
-             throw AccountException("This Account Already Exist")
+        if (clientService.findClientByCPF(cpf) != null)
+            throw AccountException("This Account Already Exist")
+    }
+
+    override fun makeTransfer(transferRequest: TransferRequest): Map<String, Account> {
+        val debitRequest = Request(transferRequest.accountIdFrom, transferRequest.amount)
+        val debit = makeDebitVerify(debitRequest)
+
+        val depositRequest = Request(transferRequest.accountIdTo, transferRequest.amount)
+        val deposit = makeDepositVerify(depositRequest)
+
+        doDebit(debit, debitRequest)
+        doDeposit(deposit, depositRequest)
+
+        return mutableMapOf(
+                "Account From" to debit,
+                "Account To" to deposit)
+
+    }
+
+    override fun makeDebitVerify(debitRequest: Request): Account {
+        val account = getAccountById(debitRequest.accountId)
+
+        if((account.amount - debitRequest.amount) < BigDecimal.ZERO)
+            throw AccountException("You can not transfer more than you have in tour account amount")
+        
+         return account
+    }
+
+    override fun makeDepositVerify(depositRequest: Request): Account {
+        val account = getAccountById(depositRequest.accountId)
+
+        if (depositRequest.amount <= BigDecimal.ZERO)
+            throw AccountException("Amount must be bigger then zero")
+
+        verifyAmountLessThenZero(account)
+        verifyDepositBiggerThen(depositRequest)
+
+        return account
+    }
+
+    override fun doDebit(accountFrom: Account, debitRequest: Request) {
+        accountFrom.amount -= debitRequest.amount
+        accountRepository.save(accountFrom)
+    }
+
+    override fun doDeposit(accountTo: Account, depositRequest: Request) {
+        accountTo.amount += depositRequest.amount
+        accountRepository.save(accountTo)
+    }
+
+    override fun verifyAmountLessThenZero(account: Account) {
+        super.verifyAmountLessThenZero(account)
+    }
+
+    override fun verifyDepositBiggerThen(depositRequest: Request) {
+        super.verifyDepositBiggerThen(depositRequest)
     }
 }
