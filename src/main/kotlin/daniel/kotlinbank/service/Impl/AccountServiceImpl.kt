@@ -56,10 +56,10 @@ class AccountServiceImpl(
     override fun makeDebitVerify(debitRequest: Request): Account {
         val account = getAccountById(debitRequest.accountId)
 
-        if((account.amount - debitRequest.amount) < BigDecimal.ZERO)
+        if ((account.amount - debitRequest.amount) < BigDecimal.ZERO)
             throw AccountException("You can not transfer more than you have in tour account amount")
-        
-         return account
+
+        return account
     }
 
     override fun makeDepositVerify(depositRequest: Request): Account {
@@ -68,8 +68,9 @@ class AccountServiceImpl(
         if (depositRequest.amount <= BigDecimal.ZERO)
             throw AccountException("Amount must be bigger then zero")
 
-        verifyAmountLessThenZero(account)
-        verifyDepositBiggerThen(depositRequest)
+        if(depositRequest.amount > BigDecimal.valueOf(2000))
+            throw AccountException("Amount of Deposit must be less then 2.000")
+
 
         return account
     }
@@ -84,11 +85,4 @@ class AccountServiceImpl(
         accountRepository.save(accountTo)
     }
 
-    override fun verifyAmountLessThenZero(account: Account) {
-        super.verifyAmountLessThenZero(account)
-    }
-
-    override fun verifyDepositBiggerThen(depositRequest: Request) {
-        super.verifyDepositBiggerThen(depositRequest)
-    }
 }

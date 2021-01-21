@@ -48,7 +48,7 @@ class AccountController (
     fun makeDeposit (@RequestBody depositRequest: DepositRequest): Account {
         val account = accountService.getAccountById(depositRequest.accountId)
         accountService.makeDepositVerify(depositRequest)
-        accountService.doDebit(account, depositRequest)
+        accountService.doDeposit(account, depositRequest)
 
         return account
     }
