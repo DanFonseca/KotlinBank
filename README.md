@@ -50,11 +50,11 @@ It is an API Rest of a principal function of Bank in BackEnd.
 The principals feature in this API are:
 
 <ol>
-<li><a href="#create-account">Create Account</a></li>
-<li><a href="#usage">Get Client By CPF</a></li> 
-<li><a href="#usage">Get Account By Id</a></li>
-<li><a href="##usage">Make Transfer</a></li>
-<li><a href="##usage">Make Deposit</a></li>
+<li><a href="#1-create-account">Create Account</a></li>
+<li><a href="#2-get-client-by-cpf">Get Client By CPF</a></li> 
+<li><a href="#3-get-account-by-accountid">Get Account By Id</a></li>
+<li><a href="##4-make-transfer">Make Transfer</a></li>
+<li><a href="##5-make-depois">Make Deposit</a></li>
 </ol>
 
 
