@@ -46,14 +46,17 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 It is an API Rest of a principal function of Bank in BackEnd.
+
 The principals feature in this API are:
 
-Here's why:
-* Create Account
-* Make Transfer
-* Make Deposit
-* Get Accounts
-* Get Client
+<ol>
+<li><a href="#createAccount">Create Account</a></li>
+<li><a href="#usage">Get Client By CPF</a></li> 
+<li><a href="#usage">Get Account By Id</a></li>
+<li><a href="#makeTransfer">Make Transfer</a></li>
+<li><a href="#makeDeposit">Make Deposit</a></li>
+</ol>
+
 
 
 ### Built With
@@ -92,7 +95,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* ##### 1 Create an Account
+* ##### 1 Create Account
 
 ```sh
    POST - localhost:8080/v1/account
@@ -109,7 +112,7 @@ This is an example of how to list things you need to use the software and how to
   }
 ```
   
-  * ##### 2 Get an Account by CPF
+  * ##### 2 Get Client By CPF
 ```sh
    GET - localhost:8080/v1/account/user/16026086013
    ```
@@ -121,6 +124,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 
 * ##### 4 Make A Transfer
+
 Let's create two accounts for make a transfer
 
 ```sh
@@ -158,8 +162,8 @@ Account two
     "amount": 100
 }
    ```
-- #####accountIdFrom: Account that will be debit amount
-- #####accountIdTo: Account that will be receive the amount
+- ##### accountIdFrom: Account that will be debit amount
+- ##### accountIdTo: Account that will be receive the amount
 
 - Response 200 with account data amount updated
 
@@ -184,7 +188,7 @@ Account two
 }
    ```
 
-* ##### 5 Make A Deposit
+* ##### 5 Make Deposit
 Lets deposit a little of Maria's account  =)
  > You can deposit until R$ 2000
 ```sh
