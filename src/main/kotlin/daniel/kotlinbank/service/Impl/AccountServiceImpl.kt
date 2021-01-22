@@ -17,7 +17,7 @@ class AccountServiceImpl(
         val clientService: ClientService
 ) : AccountService {
 
-    override fun createAccount(account: Account): Account {
+    override  fun createAccount(account: Account): Account {
 
         if (account.client != null) {
             isAccountAlreadyExist(account.client.cpf)
@@ -57,7 +57,7 @@ class AccountServiceImpl(
         val account = getAccountById(debitRequest.accountId)
 
         if ((account.amount - debitRequest.amount) < BigDecimal.ZERO)
-            throw AccountException("You can not transfer more than you have in tour account amount")
+            throw AccountException("You can not transfer more than you have in your account amount")
 
         return account
     }
@@ -68,7 +68,7 @@ class AccountServiceImpl(
         if (depositRequest.amount <= BigDecimal.ZERO)
             throw AccountException("Amount must be bigger then zero")
 
-        if(depositRequest.amount > BigDecimal.valueOf(2000))
+        if (depositRequest.amount > BigDecimal.valueOf(2000))
             throw AccountException("Amount of Deposit must be less then 2.000")
 
 

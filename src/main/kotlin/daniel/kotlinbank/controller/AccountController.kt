@@ -7,22 +7,25 @@ import daniel.kotlinbank.model.request.TransferRequest
 import daniel.kotlinbank.service.interfaces.AccountService
 import daniel.kotlinbank.service.interfaces.ClientService
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
-import java.io.Serializable
 import javax.security.auth.login.AccountException
 
 @RestController
 @RequestMapping("/v1/account")
-class AccountController (
+class AccountController(
         val clientService: ClientService,
         val accountService: AccountService
-        ) {
+) {
+
+    @PostMapping("test")
+    fun ok() = ResponseEntity.ok("Ok =)")
 
     @GetMapping("user/{cpf}")
-    fun findByCpf (@PathVariable (required = true) cpf: String): ResponseEntity<Client?> {
+    fun findByCpf(@PathVariable(required = true) cpf: String): ResponseEntity<Client?> {
         val client = clientService.findClientByCPF(cpf)
 
-        if (client != null){
+        if (client != null) {
             return ResponseEntity.ok(client)
         }
 
@@ -30,27 +33,27 @@ class AccountController (
     }
 
     @PostMapping
-    fun createAccount (@RequestBody account: Account) : Account {
-        return  accountService.createAccount(account)
-    }
+    fun createAccount(@RequestBody account: Account): ResponseEntity<Account> =
+             ResponseEntity.ok(accountService.createAccount(account))
+
 
     @GetMapping("/{id}")
-    fun getAccountById (@PathVariable id: Long) : Account {
-        return  accountService.getAccountById(id)
-    }
+    fun getAccountById(@PathVariable id: Long): ResponseEntity<Account> =
+            ResponseEntity.ok(accountService.getAccountById(id))
 
-    @PostMapping ("/transfer")
-    fun makeTransfer (@RequestBody transferRequest: TransferRequest): Map<String, Account> {
-        return accountService.makeTransfer(transferRequest)
-    }
+    @PostMapping("/transfer")
+    fun makeTransfer(@RequestBody transferRequest: TransferRequest): ResponseEntity<Map<String, Account>> =
+            ResponseEntity.ok(accountService.makeTransfer(transferRequest))
 
-    @PostMapping ("/deposit")
-    fun makeDeposit (@RequestBody depositRequest: DepositRequest): Account {
+
+    @PostMapping("/deposit")
+    fun makeDeposit(@RequestBody @Validated depositRequest: DepositRequest): ResponseEntity<Account> {
+
         val account = accountService.getAccountById(depositRequest.accountId)
         accountService.makeDepositVerify(depositRequest)
         accountService.doDeposit(account, depositRequest)
 
-        return account
+        return ResponseEntity.ok(account)
     }
 
 }
