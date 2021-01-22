@@ -71,19 +71,24 @@ This section should list any major frameworks that you built your project using.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * Verify your Maven (The version of maven built is 3.6.3)
+
   ```sh
   mvn -version
   ```
+  
+* Verify your Java (The version of java are: ````sh
+                                                 java version "11.0.7" 2020-04-14 LTS
+                                                 Java(TM) SE Runtime Environment 18.9 (build 11.0.7+8-LTS)
+                                                 Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.7+8-LTS, mixed mode))````
+  
+    ```sh
+    java -version
+    ```
 
 ### Installation
-
 
 2. Clone the repo
    ```sh
@@ -94,7 +99,11 @@ This is an example of how to list things you need to use the software and how to
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
+> ATTENTION: You must verify the correct accountId to make transfer or deposit. 
+>You can use this endpoint to list all accounts in database
+>```sh
+>    GET - localhost:8080/v1/account/
+   >```
 * ##### 1 Create Account
 
 ```sh
@@ -124,9 +133,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 
 * ##### 4 Make Transfer
-
-Let's create two accounts for make a transfer
-
+ Let's create two accounts for make a transfer
 ```sh
    POST - localhost:8080/v1/account
    ```

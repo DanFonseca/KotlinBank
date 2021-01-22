@@ -32,6 +32,10 @@ class AccountServiceImpl(
                 .orElseGet { throw AccountException("Account not Found") }
     }
 
+    override fun getAccounts(): List<Account> {
+        return accountRepository.findAll().map { x-> x }
+    }
+
     override fun isAccountAlreadyExist(cpf: String) {
         if (clientService.findClientByCPF(cpf) != null)
             throw AccountException("This Account Already Exist")

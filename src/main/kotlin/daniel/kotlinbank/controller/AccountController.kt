@@ -18,8 +18,9 @@ class AccountController(
         val accountService: AccountService
 ) {
 
-    @PostMapping("test")
-    fun ok() = ResponseEntity.ok("Ok =)")
+    @GetMapping("/")
+    fun getAccounts (): ResponseEntity<List<Account>> =
+            ResponseEntity.ok(accountService.getAccounts())
 
     @GetMapping("user/{cpf}")
     fun findByCpf(@PathVariable(required = true) cpf: String): ResponseEntity<Client?> {

@@ -12,6 +12,7 @@ import java.math.BigDecimal
 interface AccountService {
     fun createAccount (account: Account) : Account
     fun getAccountById (id: Long): Account
+    fun getAccounts (): List<Account>
     fun isAccountAlreadyExist (cpf: String)
 
     fun makeTransfer (transferRequest: TransferRequest) : Map<String, Account>
