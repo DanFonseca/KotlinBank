@@ -53,8 +53,8 @@ The principals feature in this API are:
 <li><a href="#1-create-account">Create Account</a></li>
 <li><a href="#2-get-client-by-cpf">Get Client By CPF</a></li> 
 <li><a href="#3-get-account-by-accountid">Get Account By Id</a></li>
-<li><a href="##4-make-transfer">Make Transfer</a></li>
-<li><a href="##5-make-depois">Make Deposit</a></li>
+<li><a href="#4-make-transfer">Make Transfer</a></li>
+<li><a href="#5-make-depois">Make Deposit</a></li>
 </ol>
 
 
