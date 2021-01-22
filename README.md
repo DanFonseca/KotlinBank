@@ -54,7 +54,7 @@ The principals feature in this API are:
 <li><a href="#2-get-client-by-cpf">Get Client By CPF</a></li> 
 <li><a href="#3-get-account-by-accountid">Get Account By Id</a></li>
 <li><a href="#4-make-transfer">Make Transfer</a></li>
-<li><a href="#5-make-depois">Make Deposit</a></li>
+<li><a href="#5-make-deposit">Make Deposit</a></li>
 </ol>
 
 
@@ -123,7 +123,7 @@ This is an example of how to list things you need to use the software and how to
    GET - localhost:8080/v1/account/1
    ```
 
-* ##### 4 Make A Transfer
+* ##### 4 Make Transfer
 
 Let's create two accounts for make a transfer
 
