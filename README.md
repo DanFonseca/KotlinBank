@@ -95,7 +95,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-* ##### 1 Create Account (#create-account)
+* ##### 1 Create Account
 
 ```sh
    POST - localhost:8080/v1/account
